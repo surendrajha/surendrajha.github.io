@@ -1,42 +1,35 @@
 <?php
-
 /**
  * configure here
  */
-$from = 'IT WORKER <it@domain.com>';
-$sendTo = 'IT WORKER <it@domain.com>';
+$from = 'Surendra Jha <erskjha.2009@gmail.com>';
+$sendTo = 'Surendra Jha <erskjha.2009@gmail.com>';
 $subject = 'New message from contact form';
 $fields = array('name' => 'Name', 'surname' => 'Surname', 'phone' => 'Phone', 'email' => 'Email', 'message' => 'Message');
 $htmlHeader = '';
 $htmlFooter = '';
 $okMessage = 'Contact form succesfully submitted. Thank you, I will get back to you soon!';
-
 $htmlContent = '<h1>New message from contact form</h1>';
 
 /* DO NOT EDIT BELOW */
-
 /* use classes */
 
 use Nette\Mail\Message,
     Nette\Mail\SendmailMailer;
 
 /* require framework */
-
-require 'php/Nette/nette.phar';
+require 'data/Nette/nette.phar';
 
 /* configure neccessary */
-
 $configurator = new Nette\Configurator;
-$configurator->setTempDirectory(__DIR__ . '/php/temp');
+$configurator->setTempDirectory(__DIR__ . '/data/temp');
 $container = $configurator->createContainer();
 
 /* get post */
-
 $httpRequest = $container->getService('httpRequest');
 $httpResponse = $container->getService('httpResponse');
 
 $post = $httpRequest->getPost();
-
 if ($httpRequest->isAjax()) {
     /* compose htmlContent */
 
@@ -50,11 +43,9 @@ if ($httpRequest->isAjax()) {
     $htmlContent .= '</table>';
 
     /* compose html body */
-
     $htmlBody = $htmlHeader . $htmlContent . $htmlFooter;
 
     /* send email */
-
     $mail = new Message;
     $mail->setFrom($from)
 	    ->addTo($sendTo)
@@ -64,14 +55,10 @@ if ($httpRequest->isAjax()) {
     $mailer = new SendmailMailer;
     $mailer->send($mail);
 
-
     $responseArray = array('type' => 'success', 'message' => $okMessage);
 
     $httpResponse->setCode(200);
     $response = new \Nette\Application\Responses\JsonResponse($responseArray);
     $response->send($httpRequest, $httpResponse);
 }
-
-
-
 
