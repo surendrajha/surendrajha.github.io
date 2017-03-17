@@ -113,9 +113,11 @@ function sliding() {
 	var full_url = this.href;
 	var parts = full_url.split("#");
 	var trgt = parts[1];
-
-	$('body').scrollTo($('#' + trgt), 800, {offset: -80});
-
+	if(trgt != undefined) {
+		$('body').scrollTo($('#' + trgt), 800, {offset: -80});
+	} else {
+		window.open(full_url, '_blank');
+	}
     });
 }
 
