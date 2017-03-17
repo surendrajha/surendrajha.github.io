@@ -211,7 +211,7 @@ INTRO
 }
 #intro .item h2 {
   color: #fff;
-  margin-bottom: 120px;
+  margin-bottom: 0px;
   font-weight: 400;
   opacity: 0;
   filter: alpha(opacity=0);
