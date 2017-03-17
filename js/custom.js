@@ -3,7 +3,6 @@ if ($.cookie("theme_csspath")) {
 }
 
 $(function () {
-
     animations();
     sliders();
     fullScreenContainer();
@@ -13,20 +12,16 @@ $(function () {
     map();
     counters();
     parallax();
-    demo();
+    // demo();
 });
 
 $(window).load(function () {
     windowWidth = $(window).width();
     $(this).alignElementsSameHeight();
-
     masonry();
-
 });
 $(window).resize(function () {
-
     newWindowWidth = $(window).width();
-
     if (windowWidth !== newWindowWidth) {
 	setTimeout(function () {
 	    $(this).alignElementsSameHeight();
@@ -39,7 +34,6 @@ $(window).resize(function () {
 });
 
 function demo() {
-
     if ($.cookie("theme_csspath")) {
 	$('link#theme-stylesheet').attr("href", $.cookie("theme_csspath"));
     }
@@ -442,23 +436,21 @@ function waypointsRefresh() {
 
 function contactForm() {
     $("#contact-form").submit(function () {
-
-	var url = "contact.php"; // the script where you handle the form input.
-
-	$.ajax({
-	    type: "POST",
-	    url: url,
-	    data: $(this).serialize(), // serializes the form's elements.
-	    success: function (data)
-	    {
-		var messageAlert = 'alert-' + data.type;
-		var messageText = data.message;
-		var alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable animated bounceIn"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
-		if (messageAlert && messageText) {
-		    $('#contact-form').find('.messages').html(alertBox);
-		}
-	    }
-	});
-	return false; // avoid to execute the actual submit of the form.
+		var url = "contact_me.php";
+		$.ajax({
+		    type: "POST",
+		    url: url,
+		    data: $(this).serialize(),
+		    success: function (data)
+		    {
+				var messageAlert = 'alert-' + data.type;
+				var messageText = data.message;
+				var alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable animated bounceIn"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
+				if (messageAlert && messageText) {
+			    	$('#contact-form').find('.messages').html(alertBox);
+				}
+		    }
+		});
+		return false;
     });
 }
