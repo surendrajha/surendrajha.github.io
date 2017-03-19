@@ -10,13 +10,10 @@ $htmlHeader = '';
 $htmlFooter = '';
 $okMessage = 'Contact form succesfully submitted. Thank you, I will get back to you soon!';
 $htmlContent = '<h1>New message from contact form</h1>';
-print_r("dasjkhasjdh");
+
 $secret = "6LffjRkUAAAAAEJq_uzeSCbcrizwAx5WZ9Ww2GcH";
 $response = null;
 $reCaptcha = new ReCaptcha($secret);
-
-print_r($reCaptcha);
-die();
 
 if ($_POST["g-recaptcha-response"]) {
     $response = $reCaptcha->verifyResponse(
